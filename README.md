@@ -1,42 +1,50 @@
-# Radar Signal Processing – Delay Estimation and Target Localization
+# Radar Signal Processing
 
-This project implements radar signal detection under noisy conditions using matched filtering in MATLAB/Octave. It was developed as part of the "Advanced Signal Processing" course at the Hebrew University of Jerusalem.
+Implementation of radar signal processing using matched filter, MAP delay estimation with thresholding, and 2D target localization.
 
-## 📌 Overview
-The goal of this project is to estimate the delay of a received radar signal and use it to compute the 2D position of a target (e.g., an airplane on the runway) based on signal returns from two antennas.
+## 📁 Structure
+- `main.m` – MATLAB script covering Questions 1–3; includes matched filtering, thresholded MAP, and target localization.
+- `.mat` files – input data:
+  - `sigvec.mat`
+  - `delayedvecs.mat`
+  - `delayedvecsQ2.mat`
+  - `radarreception.mat`
+- `.png` images – visual results:
+  - `trajectory.png` – estimated target path
+  - `velocity_vectors.png` – speed vectors along the path
+  - `matched_filter_r1vec.png`, `matched_filter_r2vec.png`
+  - `matched_filter_r1.png`, `matched_filter_r2.png`, `matched_filter_r3.png`
 
-Key topics include:
-- Matched Filter implementation
-- Maximum A Posteriori (MAP) delay estimation
-- Delay-to-distance conversion using signal propagation speed
-- Triangulation via circle and ellipse intersection
-- Real-time target tracking based on periodic radar pulses
+## 🧠 Overview of `main.m`
+- **Q1** – Basic delay estimation via matched filter; finds peak in noisy signals.
+- **Q2** – MAP estimator with adaptive thresholding (δ < 1), estimating delays in multiple noisy instances.
+- **Q3** – 2D localization: reshapes reception data into pulses, applies matched filter, estimates delays from two antennas, computes (x,y) positions, and plots velocity vectors.
 
-## 💡 Main Features
-- Processing discrete-time chirp signals under Gaussian noise
-- Estimating delay via peak detection in the matched filter output
-- Calculating 2D target coordinates `(x, y)` from two delay values
-- Plotting the target’s path over time
-- Implemented entirely in MATLAB
+Includes helper functions:
+- `delay_estimation`
+- `calculate_threshold`
+- `radardetect`
 
-## 📁 Files
-- `sigvec.mat` – Transmitted radar pulse
-- `delayedvecs.mat`, `delayedvecsQ2.mat` – Received signals for delay estimation
-- `radarreception.mat` – Long received signal for target tracking
-- `radardetect.m` – Main function implementing delay estimation and localization
-- Additional scripts for MAP estimation and plotting
+## 📷 Results
 
-## 🛠️ Technologies
-- MATLAB (compatible with Octave)
-- Signal processing fundamentals
-- Basic geometric localization
+### Plane trajectory  
+![Trajectory](trajectory.png)
 
-## 📘 Academic Context
-This project was developed as a homework assignment for the Advanced Signal Processing course (Fall 2022–2023) at the Hebrew University of Jerusalem.
+### Velocity vectors over path  
+![Velocity](velocity_vectors.png)
 
-## 📷 Example Output
-*(Add your plot image here if available, e.g., airplane path plot)*
+### Matched filter results – Q1  
+![mfr1v](matched_filter_r1vec.png)  
+![mfr2v](matched_filter_r2vec.png)
 
+### Matched filter results – Q2  
+![mfr1](matched_filter_r1.png)  
+![mfr2](matched_filter_r2.png)  
+![mfr3](matched_filter_r3.png)
+
+## ✅ Usage
+1. Clone repo
+2. Ensure `.m` file and all `.mat` data files are in the same folder
+3. Run `main.m` in MATLAB or Octave
+4. View `.png` outputs and console messages
 ---
-
-Want to explore more? Check out the code and run it on example `.mat` files to simulate radar target tracking in 2D.
